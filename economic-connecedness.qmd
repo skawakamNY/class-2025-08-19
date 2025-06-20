@@ -1,9 +1,44 @@
 ---
 title: "Economic Connectedness"
+author: "Shuntaro Kawakami"
 format: html
 ---
 
 ```{r}
+#| message: false
+#| echo: false
+#| warning: false
 library(tidyverse)
+library(primer.data)
 ```
 
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+ggplot(data = mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "loess", se = FALSE, linetype = "dashed", color = "black") +
+  scale_color_brewer(palette = "Set2") +
+  labs(
+    title = "Fuel Efficiency vs. Engine Size",
+    subtitle = "Higher engine displacement tends to reduce highway MPG",
+    x = "Engine Displacement (L)",
+    y = "Highway Miles per Gallon",
+    color = "Car Class"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "right"
+  )
+```
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+ggplot(data=connectedness, 
+mapping=aes(x = population, y = connectedness)) + geom_point() + scale_x_log10() +
+    geom_smooth(method="lm", color="blue") + labs(title="US County Populations versus Economic Connectedness", subtitle="Population size does not matter to EC", x="Population", y="Economic Connnectedness", Caption="Opportunity Insights")
+```
